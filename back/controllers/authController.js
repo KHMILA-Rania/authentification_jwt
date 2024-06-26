@@ -21,10 +21,10 @@ const register=async (req,res)=>{
 });
 
 await newUser.save();
-return res.status(200).send("user registered successfully");}
+return res.status(200).json("user registered successfully");}
 catch(err) {
     console.error("Error during user registration:", err);
-        return res.status(500).send("Something went wrong");
+        return res.status(500).json("Something went wrong");
 }
 } 
 

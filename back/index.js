@@ -5,12 +5,13 @@ const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser'); 
 
 const {verifyToken, verifyUser, verifyAdmin}=require('./utils/verifyToken');
-const app = express();
+const app = express({origin:'http://localhost:4200',credentials:true});
 
 
 app.use(express.json());
 app.use(cookieParser());
-
+const cors= require('cors');
+app.use(cors());
 
 
 
