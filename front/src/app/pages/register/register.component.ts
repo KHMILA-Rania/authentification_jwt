@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { confirmPasswordValidator } from '../../validators/confirmPassword.validator';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterModule } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -35,11 +36,23 @@ export default class RegisterComponent implements OnInit{
   register() {
     this.authService.registerService(this.registerForm.value).subscribe({
       next:(res)=>{
-        alert('user Created');
+        Swal.fire({
+          title: 'Success!',
+          text: 'User created  successfully',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
         this.registerForm.reset();
         this.router.navigate(['login']);
       },
-      error:(err)=>{console.log(err);}
+      error:(err)=>{console.log(err);
+        Swal.fire({
+          title: 'Error!',
+          text: 'There was an error while adding a user',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      }
     })
   }
 }

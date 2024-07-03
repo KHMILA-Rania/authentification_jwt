@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -33,11 +34,23 @@ export default class LoginComponent {
   login (){
       this.authService.loginService(this.loginForm.value).subscribe({
         next: (res)=>{
-          alert('success');
+        
+          Swal.fire({
+            title: 'Success!',
+            text: '.Login successfully',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
           this.loginForm.reset();
           this.router.navigate(['home']);
         },
         error: (err)=>{
+          Swal.fire({
+            title: 'Error!',
+            text: 'There was an error during the login.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
           console.log(err);
         }
       })
